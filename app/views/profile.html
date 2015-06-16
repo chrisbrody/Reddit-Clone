@@ -10,10 +10,11 @@
       </span>
     </div>
   </div>
-
+  <h3>User Posts</h3>
   <div class="post row" ng-repeat="(key,post) in posts">
     <div class="col-md-8 col-xs-10">
       <div class="info">
+
         <a ng-href="{{ post.url }}">
           {{ post.title }}
           <span class="url">({{ post.url | hostnameFromUrl }})</span>
