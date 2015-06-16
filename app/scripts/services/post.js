@@ -10,14 +10,20 @@ app.factory('Post', function ($firebase, FIREBASE_URL) {
 
 	var Post = {
 		all: posts,
-		create: function(post) {
-			return posts.$add(post);
+		create: function (post) {
+		    return posts.$add(post).then(function(postRef) {
+		      $firebase(ref.child('user_posts').child(post.creatorUID)).$push(postRef.name());
+		      return postRef;
+		    });
 		},
 		get: function(postId) {
 			return posts.$getRecord(postId);
 		},
 		delete: function(post) {
 			return posts.$remove(post);
+		},
+		comments: function(postId) {
+			return $firebase(ref.child('comments').child(postId)).$asArray();
 		}
 	};
 
